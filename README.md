@@ -1,5 +1,5 @@
 # Nobre del Proyecto
-* Integrantes: *
+** Integrantes: **
 * xxxxx xxxxx xxxxx xxxxx
 * xxxxx xxxxx xxxxx xxxxx
 * xxxxx xxxxx xxxxx xxxxx
