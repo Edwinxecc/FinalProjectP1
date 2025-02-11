@@ -1,2 +1,5 @@
-# FinalProjectP1
-Proyecto Final Programacion 1 - Primer Semestre UCE Grupo Code
+# Nobre del Proyecto
+* Integrantes:
+* xxxxx xxxxx xxxxx xxxxx
+* xxxxx xxxxx xxxxx xxxxx
+* xxxxx xxxxx xxxxx xxxxx
