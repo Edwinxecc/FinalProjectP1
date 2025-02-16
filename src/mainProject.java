@@ -32,9 +32,23 @@ public class mainProject {
         }
     }
 
-    public static void CrearBusDefecto(){
-        EliminarBus(); // solo es para eliminar cualquier registro anterior
-        
+    public static void CrearBusNuevo(int [][] matriz, String rutaArchivo){
+        //EliminarBus(); // solo es para eliminar cualquier registro anterior
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(rutaArchivo))) {
+            for (int i = 0; i < matriz.length; i++) {
+                // Convertir cada fila de la matriz en una cadena de texto
+                StringBuilder sb = new StringBuilder();
+                for (int j = 0; j < matriz[i].length; j++) {
+                    sb.append(matriz[i][j]);
+                    if (j < matriz[i].length - 1) sb.append(","); // Separar por comas
+                }
+                writer.write(sb.toString());
+                writer.newLine(); // Nueva línea para la siguiente fila
+            }
+            System.out.println("Matriz guardada correctamente.");
+        } catch (IOException e) {
+            System.err.println("Error al guardar la matriz: " + e.getMessage());
+        }
     }
 
     public static int[][] AsignarAsientoUnico(int[][] asientoNormal){
@@ -125,9 +139,42 @@ public class mainProject {
 
     public static void main(String[] args) {
         Scanner entrada = new Scanner(System.in);
-        String user, pass, cedulaString;
+        String user, pass, cedulaString, rutaArchivo = "bsd.txt";
         boolean acces = false, accesUser = false;
         int optionAsiento, optionPermisos;
+        int finBus[] = {0,0,0,0,0};
+        // con una matriz definimos los asientos normales
+        int normales[][] = {
+            {1,0,0,0},
+            {0,1,0,0},
+            {0,0,0,0},
+            {0,0,0,0},
+            {0,0,0,0},
+            {0,0,1,0},
+            {0,0,0,0},
+            {0,1,0,0},
+            {0,1,0,1}
+        };
+        int [][] matrizEjecucion = new int[9][4];
+        try (BufferedReader reader = new BufferedReader(new FileReader(rutaArchivo))) {
+            String line;
+            int fila = 0;
+
+            // Leer el archivo línea por línea
+            while ((line = reader.readLine()) != null) {
+                // Ignorar líneas que no contienen datos de la matriz
+                if (line.startsWith("//") || line.trim().isEmpty()) continue;
+                
+                // Procesar la línea y convertirla en un arreglo de enteros
+                String[] valores = line.split(",");
+                for (int col = 0; col < valores.length; col++) {
+                    matrizEjecucion[fila][col] = Integer.parseInt(valores[col].trim());
+                }
+                fila++;
+            }
+        } catch (IOException e) {
+            System.err.println("Error al leer el archivo: " + e.getMessage());
+        }
         //mensajes de incio
         CrearArchivo();
         System.out.println("Bienvenido al Sistema de compra de voletos");
@@ -169,6 +216,7 @@ public class mainProject {
                             EliminarBus();
                             break;
                         case 2:
+                            CrearBusNuevo(normales, rutaArchivo);
                             break;
                         default:
                             System.out.println("Selecciona una opcion valida");
@@ -191,26 +239,14 @@ public class mainProject {
         
         // asientos de bus
         // definimos la parte trasera de 5 asientos en un bus
-        int finBus[] = {0,0,0,0,0};
-        // con una matriz definimos los asientos normales
-        int normales[][] = {
-            {1,0,0,0},
-            {0,1,0,0},
-            {0,0,0,0},
-            {0,0,0,0},
-            {0,0,0,0},
-            {0,0,1,0},
-            {0,0,0,0},
-            {0,1,0,0},
-            {0,1,0,1}
-        };
+        
         // validacion de usuario
         
         // continuamos 
         if (accesUser) {
             LimpiarPantalla();
             System.out.println("El bus cuenta con los siguientes asientos: ");
-            ImprimirEstadoBus(normales, finBus);
+            ImprimirEstadoBus(matrizEjecucion, finBus);
             System.out.println("");
             System.out.println("Seleccione una opcion: ");
             System.out.println("[1] Asiento Unico.");
@@ -222,11 +258,12 @@ public class mainProject {
                     System.out.println("Proceso de Compra de asiento unico.");
                     System.out.println("");
                     System.out.println("Asiento antes de la compra");
-                    ImprimirEstadoBus(normales, finBus);
+                    ImprimirEstadoBus(matrizEjecucion, finBus);
                     System.out.println("");
                     System.out.println("Asientos despues de la compra: ");
-                    AsignarAsientoUnico(normales);
-                    ImprimirEstadoBus(normales, finBus);
+                    AsignarAsientoUnico(matrizEjecucion);
+                    ImprimirEstadoBus(matrizEjecucion, finBus);
+                    CrearBusNuevo(matrizEjecucion, rutaArchivo);
                     break;
                 case 2:
                     LimpiarPantalla();
