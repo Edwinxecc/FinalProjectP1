@@ -1,11 +1,36 @@
 package src;
 import java.util.Scanner;
-
+import java.io.*;
 
 public class mainProject {
-
-    public static void AsignarAsientoUnico(){
-
+    public static void CrearArchivo(){
+        String rutaArchivo = "bsd.txt";
+        try {
+            File archivo = new File(rutaArchivo);
+            if (archivo.createNewFile()) {
+                System.out.println("--------------------");
+                System.out.println("Archivo creado: " + archivo.getName());
+                System.out.println("--------------------");
+            }else{
+                System.out.println("--------------------");
+                System.out.println("El archivo ya existe.");
+                System.out.println("--------------------");
+            }
+        } catch (IOException e) {
+            System.err.println("Error al crear el archivo: " + e.getMessage());
+        }
+    }
+    
+    public static int[][] AsignarAsientoUnico(int[][] asientoNormal){
+        for (int i = 0; i < asientoNormal.length; i++) {
+            for (int j = 0; j < asientoNormal[i].length; j++) {
+                if (asientoNormal[i][j] == 0) {
+                    asientoNormal[i][j] = 1;
+                    return asientoNormal;
+                }
+            }
+        }
+        return asientoNormal;   
     }
 
     public static void AsignarAsientoPareja(){
@@ -87,6 +112,7 @@ public class mainProject {
         boolean acces = false;
         int optionAsiento;
         //mensajes de incio
+        CrearArchivo();
         System.out.println("Bienvenido al Sistema de compra de voletos");
         System.out.println("                en un Bus");
         System.out.println("A continuacion tines 3 faces de verificacion");
@@ -138,7 +164,13 @@ public class mainProject {
                 case 1:
                     LimpiarPantalla();
                     System.out.println("Proceso de Compra de asiento unico.");
-                    AsignarAsientoUnico();
+                    System.out.println("");
+                    System.out.println("Asiento antes de la compra");
+                    ImprimirEstadoBus(normales, finBus);
+                    System.out.println("");
+                    System.out.println("Asientos despues de la compra: ");
+                    AsignarAsientoUnico(normales);
+                    ImprimirEstadoBus(normales, finBus);
                     break;
                 case 2:
                     LimpiarPantalla();
