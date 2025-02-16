@@ -22,6 +22,21 @@ public class mainProject {
         }
     }
 
+    public static void EliminarBus(){
+        String rutaArchivo = "bsd.txt";
+        File archivo = new File(rutaArchivo);
+        if (archivo.delete()) {
+            System.out.println("El archivo se elimino correctamente");
+        }else{
+            System.out.println("No se pudo eliminar el archivo");
+        }
+    }
+
+    public static void CrearBusDefecto(){
+        EliminarBus(); // solo es para eliminar cualquier registro anterior
+        
+    }
+
     public static int[][] AsignarAsientoUnico(int[][] asientoNormal){
         for (int i = 0; i < asientoNormal.length; i++) {
             for (int j = 0; j < asientoNormal[i].length; j++) {
@@ -107,9 +122,7 @@ public class mainProject {
     public static boolean ValidarAdmin(String usr, String pass, String cedula){
         return (usr.equalsIgnoreCase("code") && pass.equalsIgnoreCase("1234") && ValidarCedula(cedula));
     }
-    public static void AdminAcces(){
-        
-    }
+
     public static void main(String[] args) {
         Scanner entrada = new Scanner(System.in);
         String user, pass, cedulaString;
@@ -148,15 +161,25 @@ public class mainProject {
                 if (acces) {
                     LimpiarPantalla();
                     System.out.println("");
-                    System.out.println("Opciones como adminitrador: ");
+                    System.out.println("Opciones como administrador: ");
                     System.out.println("[1] Eliminar bus guardado.");
                     System.out.println("[2] Crear nuevo bus por defecto");
-                    
+                    switch (entrada.nextInt()) {
+                        case 1:
+                            EliminarBus();
+                            break;
+                        case 2:
+                            break;
+                        default:
+                            System.out.println("Selecciona una opcion valida");
+                            break;
+                    }
                 }
                 break;
             case 1:
+                LimpiarPantalla();
                 //usuario normal
-                System.out.println("A continuacion tines 1 faces de verificacion");
+                System.out.println("A continuacion tines 1 face de verificacion");
                 System.out.println("Ingresa tu numero de cedula: ");
                 cedulaString = entrada.next();
                 accesUser = ValidarCedula(cedulaString);
