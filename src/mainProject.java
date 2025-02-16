@@ -3,6 +3,7 @@ import java.util.Scanner;
 import java.io.*;
 
 public class mainProject {
+
     public static void CrearArchivo(){
         String rutaArchivo = "bsd.txt";
         try {
@@ -20,7 +21,7 @@ public class mainProject {
             System.err.println("Error al crear el archivo: " + e.getMessage());
         }
     }
-    
+
     public static int[][] AsignarAsientoUnico(int[][] asientoNormal){
         for (int i = 0; i < asientoNormal.length; i++) {
             for (int j = 0; j < asientoNormal[i].length; j++) {
@@ -103,19 +104,68 @@ public class mainProject {
         return digitoVer == digitoInicial;
     }
 
-    public static boolean ValidarUsuario(String usr, String pass, String cedula){
+    public static boolean ValidarAdmin(String usr, String pass, String cedula){
         return (usr.equalsIgnoreCase("code") && pass.equalsIgnoreCase("1234") && ValidarCedula(cedula));
+    }
+    public static void AdminAcces(){
+        
     }
     public static void main(String[] args) {
         Scanner entrada = new Scanner(System.in);
         String user, pass, cedulaString;
-        boolean acces = false;
-        int optionAsiento;
+        boolean acces = false, accesUser = false;
+        int optionAsiento, optionPermisos;
         //mensajes de incio
         CrearArchivo();
         System.out.println("Bienvenido al Sistema de compra de voletos");
         System.out.println("                en un Bus");
-        System.out.println("A continuacion tines 3 faces de verificacion");
+        System.out.println("[0] Administrado.");
+        System.out.println("[1] Usuario.");
+        optionPermisos = entrada.nextInt();
+        switch (optionPermisos) {
+            case 0:
+                //administrador solo code  
+                LimpiarPantalla();
+                System.out.println("A continuacion tines 3 faces de verificacion");
+                int intentos=0;
+                do {
+                    System.out.println("");
+                    System.out.println("---------------------------------------");
+                    System.out.println("Intento numero: " + (intentos+1));
+                    System.out.print("Por favor ingresa tu usuario: ");
+                    user = entrada.next();
+                    System.out.print("Por favor ingresa tu clave: ");
+                    pass = entrada.next();
+                    System.out.println("Ingresa tu numero de cedula: ");
+                    cedulaString = entrada.next();
+                    if (acces = ValidarAdmin(user, pass, cedulaString)) {
+                        break;
+                    }
+                    //System.out.println(acces);
+                    intentos++;
+                
+                } while (acces == false && intentos != 3);
+                if (acces) {
+                    LimpiarPantalla();
+                    System.out.println("");
+                    System.out.println("Opciones como adminitrador: ");
+                    System.out.println("[1] Eliminar bus guardado.");
+                    System.out.println("[2] Crear nuevo bus por defecto");
+                    
+                }
+                break;
+            case 1:
+                //usuario normal
+                System.out.println("A continuacion tines 1 faces de verificacion");
+                System.out.println("Ingresa tu numero de cedula: ");
+                cedulaString = entrada.next();
+                accesUser = ValidarCedula(cedulaString);
+                break;
+            default:
+                System.out.println("Ingrese una opcion valida.");
+                break;
+        }
+        
         // asientos de bus
         // definimos la parte trasera de 5 asientos en un bus
         int finBus[] = {0,0,0,0,0};
@@ -132,26 +182,9 @@ public class mainProject {
             {0,1,0,1}
         };
         // validacion de usuario
-        int intentos=0;
-        do {
-            System.out.println("");
-            System.out.println("---------------------------------------");
-            System.out.println("Intento numero: " + (intentos+1));
-            System.out.print("Por favor ingresa tu usuario: ");
-            user = entrada.next();
-            System.out.print("Por favor ingresa tu clave: ");
-            pass = entrada.next();
-            System.out.println("Ingresa tu numero de cedula: ");
-            cedulaString = entrada.next();
-            if (acces = ValidarUsuario(user, pass, cedulaString)) {
-                break;
-            }
-            //System.out.println(acces);
-            intentos++;
-
-        } while (acces == false && intentos != 3);
+        
         // continuamos 
-        if (acces) {
+        if (accesUser) {
             LimpiarPantalla();
             System.out.println("El bus cuenta con los siguientes asientos: ");
             ImprimirEstadoBus(normales, finBus);
