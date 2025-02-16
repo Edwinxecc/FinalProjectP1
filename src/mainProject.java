@@ -4,6 +4,26 @@ import java.io.*;
 
 public class mainProject {
 
+    public static void CrearNuevoBus(int [][] matriz, String rutaArchivo){
+        EliminarBus(); // solo es para eliminar cualquier registro anterior
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(rutaArchivo))) {
+            for (int i = 0; i < matriz.length; i++) {
+                
+                StringBuilder sb = new StringBuilder();
+                for (int j = 0; j < matriz[i].length; j++) {
+                    sb.append(matriz[i][j]);
+                    if (j < matriz[i].length - 1) sb.append(","); 
+                }
+                writer.write(sb.toString());
+                writer.newLine(); 
+            }
+            System.out.println("");
+            System.out.println("Creacion de nuevo bus exitosa!");
+        } catch (IOException e) {
+            System.err.println("Error al guardar la matriz: " + e.getMessage());
+        }
+    }
+
     public static void CrearArchivo(){
         String rutaArchivo = "bsd.txt";
         try {
@@ -32,20 +52,21 @@ public class mainProject {
         }
     }
 
-    public static void CrearBusNuevo(int [][] matriz, String rutaArchivo){
+    public static void GuardarEstadoMatriz(int [][] matriz, String rutaArchivo){
         //EliminarBus(); // solo es para eliminar cualquier registro anterior
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(rutaArchivo))) {
             for (int i = 0; i < matriz.length; i++) {
-                // Convertir cada fila de la matriz en una cadena de texto
+                
                 StringBuilder sb = new StringBuilder();
                 for (int j = 0; j < matriz[i].length; j++) {
                     sb.append(matriz[i][j]);
-                    if (j < matriz[i].length - 1) sb.append(","); // Separar por comas
+                    if (j < matriz[i].length - 1) sb.append(","); 
                 }
                 writer.write(sb.toString());
-                writer.newLine(); // Nueva línea para la siguiente fila
+                writer.newLine(); 
             }
-            System.out.println("Matriz guardada correctamente.");
+            System.out.println("");
+            System.out.println("Asiento comprado exitosamente");
         } catch (IOException e) {
             System.err.println("Error al guardar la matriz: " + e.getMessage());
         }
@@ -138,13 +159,14 @@ public class mainProject {
     }
 
     public static void main(String[] args) {
+        CrearArchivo();
         Scanner entrada = new Scanner(System.in);
         String user, pass, cedulaString, rutaArchivo = "bsd.txt";
         boolean acces = false, accesUser = false;
         int optionAsiento, optionPermisos;
         int finBus[] = {0,0,0,0,0};
         // con una matriz definimos los asientos normales
-        int normales[][] = {
+        int BusInicio[][] = {
             {1,0,0,0},
             {0,1,0,0},
             {0,0,0,0},
@@ -155,6 +177,8 @@ public class mainProject {
             {0,1,0,0},
             {0,1,0,1}
         };
+        GuardarEstadoMatriz(BusInicio, rutaArchivo);
+        LimpiarPantalla();
         int [][] matrizEjecucion = new int[9][4];
         try (BufferedReader reader = new BufferedReader(new FileReader(rutaArchivo))) {
             String line;
@@ -176,7 +200,7 @@ public class mainProject {
             System.err.println("Error al leer el archivo: " + e.getMessage());
         }
         //mensajes de incio
-        CrearArchivo();
+        
         System.out.println("Bienvenido al Sistema de compra de voletos");
         System.out.println("                en un Bus");
         System.out.println("[0] Administrado.");
@@ -216,7 +240,8 @@ public class mainProject {
                             EliminarBus();
                             break;
                         case 2:
-                            CrearBusNuevo(normales, rutaArchivo);
+                            CrearNuevoBus(BusInicio, rutaArchivo);
+                            System.out.println("");
                             break;
                         default:
                             System.out.println("Selecciona una opcion valida");
@@ -263,7 +288,7 @@ public class mainProject {
                     System.out.println("Asientos despues de la compra: ");
                     AsignarAsientoUnico(matrizEjecucion);
                     ImprimirEstadoBus(matrizEjecucion, finBus);
-                    CrearBusNuevo(matrizEjecucion, rutaArchivo);
+                    GuardarEstadoMatriz(matrizEjecucion, rutaArchivo);
                     break;
                 case 2:
                     LimpiarPantalla();
