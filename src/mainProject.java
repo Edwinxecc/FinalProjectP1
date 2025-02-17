@@ -84,10 +84,6 @@ public class mainProject {
         return asientoNormal;   
     }
 
-    public static void AsignarAsientoPareja(){
-
-    }
-
     public static void ImprimirEstadoBus(int [][] normales, int [] finBus){
         System.out.println(" ");
         for (int i = 0; i < normales.length; i++) {
@@ -177,19 +173,16 @@ public class mainProject {
             {0,1,0,0},
             {0,1,0,1}
         };
-        GuardarEstadoMatriz(BusInicio, rutaArchivo);
+        //GuardarEstadoMatriz(BusInicio, rutaArchivo); no descomentar sino exite un bug jajaja
         LimpiarPantalla();
         int [][] matrizEjecucion = new int[9][4];
         try (BufferedReader reader = new BufferedReader(new FileReader(rutaArchivo))) {
             String line;
             int fila = 0;
 
-            // Leer el archivo línea por línea
             while ((line = reader.readLine()) != null) {
-                // Ignorar líneas que no contienen datos de la matriz
                 if (line.startsWith("//") || line.trim().isEmpty()) continue;
                 
-                // Procesar la línea y convertirla en un arreglo de enteros
                 String[] valores = line.split(",");
                 for (int col = 0; col < valores.length; col++) {
                     matrizEjecucion[fila][col] = Integer.parseInt(valores[col].trim());
@@ -274,8 +267,8 @@ public class mainProject {
             ImprimirEstadoBus(matrizEjecucion, finBus);
             System.out.println("");
             System.out.println("Seleccione una opcion: ");
-            System.out.println("[1] Asiento Unico.");
-            System.out.println("[2] Asiento en Pareja.");
+            System.out.println("[1] Comprar Asiento.");
+            System.out.println("[2] Salir.");
             optionAsiento = entrada.nextInt();
             switch (optionAsiento) {
                 case 1:
@@ -292,8 +285,9 @@ public class mainProject {
                     break;
                 case 2:
                     LimpiarPantalla();
-                    System.out.println("Proceso de Compra de asiento en Pareja.");
-                    AsignarAsientoPareja();
+                    System.out.println("");
+                    System.out.println("Saliendo del Sistema");
+                    System.out.println(" ");
                     break;
                 default:
                     System.out.println("Seleccione una opcion correcta");
