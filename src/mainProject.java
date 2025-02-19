@@ -305,6 +305,7 @@ public class mainProject {
         
         // continuamos 
         if (accesUser) {
+            Scanner exclusivo = new Scanner(System.in);
             LimpiarPantalla();
             System.out.println("El bus cuenta con los siguientes asientos: ");
             System.out.println("Libres: " + AsientosLibres(matrizEjecucion));
@@ -314,7 +315,7 @@ public class mainProject {
             System.out.println("[1] Comprar Asiento Unico.");
             System.out.println("[2] Comprar Asiento en Pareja.");
             System.out.println("[0] Salir.");
-            optionAsiento = entrada.nextInt();
+            optionAsiento = exclusivo.nextInt();
             switch (optionAsiento) {
                 case 0:
                     LimpiarPantalla();
@@ -328,31 +329,32 @@ public class mainProject {
                     System.out.println("Proceso de Compra de asiento unico.");
                     System.out.println("");
                     System.out.println("Asiento antes de la compra");
+                    System.out.println("Libres: " + AsientosLibres(matrizEjecucion));
                     ImprimirEstadoBus(matrizEjecucion, finBus);
                     System.out.println("");
                     System.out.println("Asientos despues de la compra: ");
                     AsignarAsientoUnico(matrizEjecucion);
+                    System.out.println("Libres: " + AsientosLibres(matrizEjecucion));
                     ImprimirEstadoBus(matrizEjecucion, finBus);
                     GuardarEstadoMatriz(matrizEjecucion, rutaArchivo);
                     System.out.println("\n");
                     System.out.println("Desea Generar su factura ?");
                     System.out.println("[1] Si.");
                     System.out.println("[2] No.");
-                    optionFactura = entrada.nextInt();
+                    optionFactura = exclusivo.nextInt();
 
                     switch (optionFactura) {
                         case 1:
                             LimpiarPantalla();
-                            String nombre;
+                            String nombreUnico;
                             System.out.println("Para generar su factura pot favor ingrese");
                             System.out.println("Sus 2 Apellidos y Nombres: ");
-                            nombre = entrada.nextLine();
-                            nombre = entrada.nextLine();
-                            if (nombre.length() > 7) {
+                            nombreUnico = exclusivo.nextLine();
+                            if (nombreUnico.length() > 7) {
                                 // usaria la clase Facturacion pero aun no esa JAJAJAj
                                 // fuck 
                                 System.out.println("Se imprime la factura");
-                                System.out.println(nombre);
+                                System.out.println(nombreUnico);
                             }else{
                                 System.out.println("Ingrese un nombre valido.");
                             }
@@ -374,31 +376,32 @@ public class mainProject {
                     System.out.println("Proceso de Compra de asiento en Pareja.");
                     System.out.println("");
                     System.out.println("Asiento antes de la compra");
+                    System.out.println("Libres: " + AsientosLibres(matrizEjecucion));
                     ImprimirEstadoBus(matrizEjecucion, finBus);
                     System.out.println("");
                     System.out.println("Asientos despues de la compra: ");
                     AsignarAsientoPareja(matrizEjecucion);
+                    System.out.println("Libres: " + AsientosLibres(matrizEjecucion));
                     ImprimirEstadoBus(matrizEjecucion, finBus);
                     GuardarEstadoMatriz(matrizEjecucion, rutaArchivo);
                     System.out.println("\n");
                     System.out.println("Desea Generar su factura ?");
                     System.out.println("[1] Si.");
                     System.out.println("[2] No.");
-                    optionFactura2 = entrada.nextInt();
+                    optionFactura2 = exclusivo.nextInt();
 
                     switch (optionFactura2) {
                         case 1:
                             LimpiarPantalla();
-                            String nombre;
+                            String nombrePareja;
                             System.out.println("Para generar su factura pot favor ingrese");
                             System.out.println("Sus 2 Apellidos y Nombres: ");
-                            nombre = entrada.nextLine();
-                            nombre = entrada.nextLine();
-                            if (nombre.length() > 7) {
+                            nombrePareja = exclusivo.nextLine();
+                            if (nombrePareja.length() > 7) {
                                 // usaria la clase Facturacion pero aun no esa JAJAJAj
                                 // fuck 
                                 System.out.println("Se imprime la factura");
-                                System.out.println(nombre);
+                                System.out.println(nombrePareja);
                             }else{
                                 System.out.println("Ingrese un nombre valido.");
                             }
@@ -418,7 +421,8 @@ public class mainProject {
                     System.out.println("Seleccione una opcion correcta");
                     break;
             }
-        } 
+            exclusivo.close();
+        }
         
         entrada.close();
     }
