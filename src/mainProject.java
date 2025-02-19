@@ -199,6 +199,7 @@ public class mainProject {
 
     public static void main(String[] args) {
         CrearArchivo();
+        Scanner exclusivo = new Scanner(System.in);
         Scanner entrada = new Scanner(System.in);
         String user, pass, cedulaString, rutaArchivo = "bsd.txt";
         boolean acces = false, accesUser = false;
@@ -305,7 +306,6 @@ public class mainProject {
         
         // continuamos 
         if (accesUser) {
-            Scanner exclusivo = new Scanner(System.in);
             LimpiarPantalla();
             System.out.println("El bus cuenta con los siguientes asientos: ");
             System.out.println("Libres: " + AsientosLibres(matrizEjecucion));
@@ -349,6 +349,7 @@ public class mainProject {
                             String nombreUnico;
                             System.out.println("Para generar su factura pot favor ingrese");
                             System.out.println("Sus 2 Apellidos y Nombres: ");
+                            // por aqui existe un bug de ingreso de daros solucionar !!!
                             nombreUnico = exclusivo.nextLine();
                             if (nombreUnico.length() > 7) {
                                 // usaria la clase Facturacion pero aun no esa JAJAJAj
@@ -396,6 +397,7 @@ public class mainProject {
                             String nombrePareja;
                             System.out.println("Para generar su factura pot favor ingrese");
                             System.out.println("Sus 2 Apellidos y Nombres: ");
+                            // por aqui existe un bug de ingreso de daros solucionar !!!
                             nombrePareja = exclusivo.nextLine();
                             if (nombrePareja.length() > 7) {
                                 // usaria la clase Facturacion pero aun no esa JAJAJAj
