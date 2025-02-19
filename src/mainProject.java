@@ -103,7 +103,11 @@ public class mainProject {
 
         for (int i = 0; i < finBus.length; i++) {
             System.out.print("|");
-            System.out.print(finBus[i]);
+            if (finBus[i] == 1) {
+                System.out.print("x");
+            }else{
+                System.out.print(finBus[i]);
+            }
             System.out.print("|");
         }
     }
@@ -164,7 +168,7 @@ public class mainProject {
         String user, pass, cedulaString, rutaArchivo = "bsd.txt";
         boolean acces = false, accesUser = false;
         int optionAsiento, optionPermisos;
-        int finBus[] = {0,0,0,0,0};
+        int finBus[] = {0,1,0,0,1};
         // con una matriz definimos los asientos normales
         int BusInicio[][] = {
             {1,0,0,0},
