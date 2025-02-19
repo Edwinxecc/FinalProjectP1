@@ -4,6 +4,30 @@ import java.io.*;
 
 public class mainProject {
 
+    public static int [][] AsignarAsientoPareja(int [][] matriz){
+        // fue mejor analisar las columnas sin bucles jaja
+        int a = -1, b = -1, c=-1, d=-1;
+        for (int i = 0; i < matriz.length; i++) {
+            //izquierda
+            a = matriz[i][0];
+            b = matriz[i][1];
+            if (a == 0 && b == a) {
+                matriz[i][0] = 1;
+                matriz[i][1] = 1;
+                return matriz;
+            }
+            //derecha de bus
+            c = matriz[i][2];
+            d = matriz[i][3];
+            if (c == 0 && d == c) {
+                matriz[i][2] = 1;
+                matriz[i][3] = 1;
+                return matriz;
+            }
+        }
+        return matriz;
+    }
+
     public static int AsientosLibres(int [][] matriz){
         int suma = 0;
         for (int i = 0; i < matriz.length; i++) {
@@ -92,7 +116,7 @@ public class mainProject {
                 }
             }
         }
-        return asientoNormal;   
+        return asientoNormal;
     }
 
     public static void ImprimirEstadoBus(int [][] normales, int [] finBus){
@@ -287,10 +311,17 @@ public class mainProject {
             ImprimirEstadoBus(matrizEjecucion, finBus);
             System.out.println("");
             System.out.println("Seleccione una opcion: ");
-            System.out.println("[1] Comprar Asiento.");
-            System.out.println("[2] Salir.");
+            System.out.println("[1] Comprar Asiento Unico.");
+            System.out.println("[2] Comprar Asiento en Pareja.");
+            System.out.println("[0] Salir.");
             optionAsiento = entrada.nextInt();
             switch (optionAsiento) {
+                case 0:
+                    LimpiarPantalla();
+                    System.out.println("");
+                    System.out.println("Saliendo del Sistema");
+                    System.out.println(" ");
+                    break;
                 case 1:
                     int optionFactura = -1;
                     LimpiarPantalla();
@@ -332,15 +363,56 @@ public class mainProject {
                             System.out.println("Chaooo.");
                             break;
                         default:
+                            System.out.println("Seleccione una opcion correcta");
                             break;
                     }
 
                     break;
                 case 2:
+                    int optionFactura2 = -1;
                     LimpiarPantalla();
+                    System.out.println("Proceso de Compra de asiento en Pareja.");
                     System.out.println("");
-                    System.out.println("Saliendo del Sistema");
-                    System.out.println(" ");
+                    System.out.println("Asiento antes de la compra");
+                    ImprimirEstadoBus(matrizEjecucion, finBus);
+                    System.out.println("");
+                    System.out.println("Asientos despues de la compra: ");
+                    AsignarAsientoPareja(matrizEjecucion);
+                    ImprimirEstadoBus(matrizEjecucion, finBus);
+                    GuardarEstadoMatriz(matrizEjecucion, rutaArchivo);
+                    System.out.println("\n");
+                    System.out.println("Desea Generar su factura ?");
+                    System.out.println("[1] Si.");
+                    System.out.println("[2] No.");
+                    optionFactura2 = entrada.nextInt();
+
+                    switch (optionFactura2) {
+                        case 1:
+                            LimpiarPantalla();
+                            String nombre;
+                            System.out.println("Para generar su factura pot favor ingrese");
+                            System.out.println("Sus 2 Apellidos y Nombres: ");
+                            nombre = entrada.nextLine();
+                            nombre = entrada.nextLine();
+                            if (nombre.length() > 7) {
+                                // usaria la clase Facturacion pero aun no esa JAJAJAj
+                                // fuck 
+                                System.out.println("Se imprime la factura");
+                                System.out.println(nombre);
+                            }else{
+                                System.out.println("Ingrese un nombre valido.");
+                            }
+                            break;
+                        case 2:
+                            LimpiarPantalla();
+                            System.out.println("\nGracias por comprar tu asiento.");
+                            System.out.println("Chaooo.");
+                            break;
+                        default:
+                            System.out.println("Seleccione una opcion correcta");
+                            break;
+                    }
+
                     break;
                 default:
                     System.out.println("Seleccione una opcion correcta");
