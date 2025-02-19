@@ -4,6 +4,17 @@ import java.io.*;
 
 public class mainProject {
 
+    public static int AsientosLibres(int [][] matriz){
+        int suma = 0;
+        for (int i = 0; i < matriz.length; i++) {
+            for (int j = 0; j < matriz[i].length; j++) {
+                suma += matriz[i][j];
+            }
+        }
+        suma = (36 - suma);
+        return suma;
+    }
+
     public static void CrearNuevoBus(int [][] matriz, String rutaArchivo){
         EliminarBus(); // solo es para eliminar cualquier registro anterior
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(rutaArchivo))) {
@@ -272,6 +283,7 @@ public class mainProject {
         if (accesUser) {
             LimpiarPantalla();
             System.out.println("El bus cuenta con los siguientes asientos: ");
+            System.out.println("Libres: " + AsientosLibres(matrizEjecucion));
             ImprimirEstadoBus(matrizEjecucion, finBus);
             System.out.println("");
             System.out.println("Seleccione una opcion: ");
