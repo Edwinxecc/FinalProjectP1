@@ -272,6 +272,7 @@ public class mainProject {
             optionAsiento = entrada.nextInt();
             switch (optionAsiento) {
                 case 1:
+                    int optionFactura = -1;
                     LimpiarPantalla();
                     System.out.println("Proceso de Compra de asiento unico.");
                     System.out.println("");
@@ -282,6 +283,38 @@ public class mainProject {
                     AsignarAsientoUnico(matrizEjecucion);
                     ImprimirEstadoBus(matrizEjecucion, finBus);
                     GuardarEstadoMatriz(matrizEjecucion, rutaArchivo);
+                    System.out.println("\n");
+                    System.out.println("Desea Generar su factura ?");
+                    System.out.println("[1] Si.");
+                    System.out.println("[2] No.");
+                    optionFactura = entrada.nextInt();
+
+                    switch (optionFactura) {
+                        case 1:
+                            LimpiarPantalla();
+                            String nombre;
+                            System.out.println("Para generar su factura pot favor ingrese");
+                            System.out.println("Sus 2 Apellidos y Nombres: ");
+                            nombre = entrada.nextLine();
+                            nombre = entrada.nextLine();
+                            if (nombre.length() > 7) {
+                                // usaria la clase Facturacion pero aun no esa JAJAJAj
+                                // fuck 
+                                System.out.println("Se imprime la factura");
+                                System.out.println(nombre);
+                            }else{
+                                System.out.println("Ingrese un nombre valido.");
+                            }
+                            break;
+                        case 2:
+                            LimpiarPantalla();
+                            System.out.println("\nGracias por comprar tu asiento.");
+                            System.out.println("Chaooo.");
+                            break;
+                        default:
+                            break;
+                    }
+
                     break;
                 case 2:
                     LimpiarPantalla();
@@ -294,7 +327,7 @@ public class mainProject {
                     break;
             }
         } 
-
+        
         entrada.close();
     }
     
