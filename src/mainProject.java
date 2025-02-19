@@ -89,7 +89,11 @@ public class mainProject {
         for (int i = 0; i < normales.length; i++) {
             System.out.print("|");
             for (int j = 0; j < normales[i].length; j++) {
-                System.out.print(normales[i][j] + "|");
+                if (normales[i][j] == 1) {
+                    System.out.print("x" + "|");
+                }else{
+                    System.out.print(normales[i][j] + "|");
+                }
                 if (j==1) {
                     System.out.print(" --- |");
                 }
@@ -165,11 +169,11 @@ public class mainProject {
         int BusInicio[][] = {
             {1,0,0,0},
             {0,1,0,0},
-            {0,0,0,0},
-            {0,0,0,0},
+            {0,0,1,1},
+            {0,1,0,0},
             {0,0,0,0},
             {0,0,1,0},
-            {0,0,0,0},
+            {1,0,0,0},
             {0,1,0,0},
             {0,1,0,1}
         };
