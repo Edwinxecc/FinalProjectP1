@@ -201,7 +201,7 @@ public class mainProject {
         CrearArchivo();
         Scanner exclusivo = new Scanner(System.in);
         Scanner entrada = new Scanner(System.in);
-        String user, pass, cedulaString, rutaArchivo = "bsd.txt";
+        String user, pass, cedulaString ="", rutaArchivo = "bsd.txt";
         boolean acces = false, accesUser = false;
         int optionAsiento, optionPermisos;
         int finBus[] = {0,1,0,0,1};
@@ -357,6 +357,8 @@ public class mainProject {
                                 // fuck 
                                 System.out.println("Se imprime la factura");
                                 System.out.println(nombreUnico);
+                                Facturacion cliienteUnico = new Facturacion(cedulaString, nombreUnico, optionAsiento);
+                                System.out.println(cliienteUnico.GenerarMail());
                             }else{
                                 System.out.println("Ingrese un nombre valido.");
                             }
@@ -406,6 +408,9 @@ public class mainProject {
                                 // fuck 
                                 System.out.println("Se imprime la factura");
                                 System.out.println(nombrePareja);
+                                //clase facturacion aqui empiza lo de la factura 
+                                Facturacion clientePareja = new Facturacion(cedulaString, nombrePareja, optionAsiento);
+                                System.out.println(clientePareja.GenerarMail());
                             }else{
                                 System.out.println("Ingrese un nombre valido.");
                             }
