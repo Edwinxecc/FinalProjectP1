@@ -15,8 +15,7 @@ En base a lo expuesto en clases, realizar un proyecto que permita resolver un pr
 -generación de archivo físico
 
 El proyecto debe incluir lo aprendido, tal como:
-
-     - Estructuras de condición, selección y de repetición
+ - Estructuras de condición, selección y de repetición
 
 Funciones
 arreglos y matrices
