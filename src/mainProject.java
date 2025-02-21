@@ -355,10 +355,14 @@ public class mainProject {
                             if (nombreUnico.length() > 7) {
                                 // usaria la clase Facturacion pero aun no esa JAJAJAj
                                 // fuck 
-                                System.out.println("Se imprime la factura");
+                                LimpiarPantalla();
+                                System.out.println("Generando Factura...");
                                 System.out.println(nombreUnico);
                                 Facturacion cliienteUnico = new Facturacion(cedulaString, nombreUnico, optionAsiento);
-                                System.out.println(cliienteUnico.GenerarMail());
+                                //System.out.println(cliienteUnico.GenerarMail());
+                                //System.out.println(cliienteUnico.GenerarNumero());
+                                cliienteUnico.GenerarFacturaEnArchivo();
+                                System.out.println("Factura Guardad como: " + cedulaString + ".txt");
                             }else{
                                 System.out.println("Ingrese un nombre valido.");
                             }
@@ -406,11 +410,14 @@ public class mainProject {
                             if (nombrePareja.length() > 7) {
                                 // usaria la clase Facturacion pero aun no esa JAJAJAj
                                 // fuck 
-                                System.out.println("Se imprime la factura");
-                                System.out.println(nombrePareja);
+                                LimpiarPantalla();
+                                System.out.println("Generando Factura...");
+                                //System.out.println(nombrePareja);
                                 //clase facturacion aqui empiza lo de la factura 
                                 Facturacion clientePareja = new Facturacion(cedulaString, nombrePareja, optionAsiento);
-                                System.out.println(clientePareja.GenerarMail());
+                                //System.out.println(clientePareja.GenerarMail());
+                                clientePareja.GenerarFacturaEnArchivo();
+                                System.out.println("Factura Guardad como: " + cedulaString + ".txt");
                             }else{
                                 System.out.println("Ingrese un nombre valido.");
                             }
