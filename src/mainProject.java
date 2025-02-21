@@ -351,6 +351,7 @@ public class mainProject {
                             System.out.println("Sus 2 Apellidos y Nombres: ");
                             // por aqui existe un bug de ingreso de daros solucionar !!!
                             nombreUnico = exclusivo.nextLine();
+                            nombreUnico = exclusivo.nextLine();
                             if (nombreUnico.length() > 7) {
                                 // usaria la clase Facturacion pero aun no esa JAJAJAj
                                 // fuck 
@@ -398,6 +399,7 @@ public class mainProject {
                             System.out.println("Para generar su factura pot favor ingrese");
                             System.out.println("Sus 2 Apellidos y Nombres: ");
                             // por aqui existe un bug de ingreso de daros solucionar !!!
+                            nombrePareja = exclusivo.nextLine();
                             nombrePareja = exclusivo.nextLine();
                             if (nombrePareja.length() > 7) {
                                 // usaria la clase Facturacion pero aun no esa JAJAJAj
