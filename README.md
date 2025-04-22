@@ -1,8 +1,7 @@
 # Compra de asientos en un Bus
 - Integrantes:
 * Caiza Cobacango Edwin David
-* xxxxx xxxxx xxxxx xxxxx
-* xxxxx xxxxx xxxxx xxxxx
+
 ## Nuevos requerimientos
 En base a lo expuesto en clases, realizar un proyecto que permita resolver un problema de la vida real, sistematizando y ejecutando actividades que enmarquen dicha resolución, entre las  principales:
 
